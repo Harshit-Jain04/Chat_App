@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+        <script>
+            const name = prompt('enter your name');
+            let socket;
+            async function asd(){
+                socket = await io();
+                socket.on('connect',()=>{
+                    console.log('hello');
+                    socket.emit('new',name);
+                });
+                console.log('waiting');
+                socket.on('newmessage', (data, name) => {
+                    let message = document.getElementById('message');
+                    let x = document.createElement('p');
+                    x.innerText = name + ':' + data;
+                    x.style.textAlign = 'left';
+                    x.style.backgroundColor = 'cyan';
+                    x.style.width = 'fit-content';
+                    message.appendChild(x);
+                    //message.scrollTop=message.scrollHeight;
+                });
+            };
+            function join(){
+                const join = document.getElementById('to').value;
+                if(socket.connected){
+                socket.emit('join',name,join);}
+                else{
+                    alert('wait for connection');
+                }
+            }
+            function send(){
+                const message = document.getElementById('textinput');
+                const to = document.getElementById('to').value;
+                let h = document.getElementById('message');
+                let y = document.createElement('p');
+                y.innerText=message.value;
+                y.style.textAlign='right'; 
+                y.style.backgroundColor='greenyellow';
+                y.style.width='fit-content';
+                //console.log(h);
+                h.appendChild(y);
+                socket.emit('message',name,message.value,to);
+                // message.scrollTop = message.scrollHeight;
+                
+                message.value='';
+            }
+            asd();
+            </script>
+      
+    </head>
+    <body>
+        <label for="to">JOIN ROOM <input type="text" id="to"><button onclick="join()">JOIN</button></label>
+        <div id="message" style="height: 600px;width: 100%;background-color:ghostwhite;overflow-y: auto;">
+            
+        </div>
+        <div id="sendtext" style="height: 10%;width: 100%; border: 5px;display: flex;">
+            <input type="text" placeholder="Message" id="textinput" style="height: 100%;width: fit-content;">
+            <button type="submit" onclick="send()" style="height: max-content; width: max-content;">Send</button>
+        </div>
+    </body>
+</html>
