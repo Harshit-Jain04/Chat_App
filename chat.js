@@ -7,7 +7,7 @@ const io = new Server(server);
 
 app.get("/", function (req, res) {
     console.log(req.url);
-    res.sendFile('C:/Users/ACER/Documents/codes/chat.html');
+    res.sendFile('chat.html');
 });
 users = new Object();
 console.log(users);
