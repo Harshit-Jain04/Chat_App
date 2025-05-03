@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Style Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fab fa-whatsapp"></i>
+                <h1>WhatsApp Style Chat</h1>
+            </div>
+            <div class="login-form">
+                <input type="text" id="username-input" placeholder="Enter your name" autocomplete="off">
+                <button id="join-btn">Start Chatting</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Screen -->
+    <div id="chat-screen" class="hidden">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-actions">
+                        <i class="fas fa-circle-notch"></i>
+                        <i class="fas fa-message"></i>
+                        <i class="fas fa-ellipsis-vertical"></i>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search or start new chat">
+                    </div>
+                </div>
+            </div>
+            <div class="groups-section">
+                <div class="groups-header">
+                    <h3>Groups</h3>
+                    <button id="create-group-btn" class="icon-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div id="groups-list" class="groups-list"></div>
+                <div class="available-groups-section">
+                    <h3>Available Groups</h3>
+                    <div id="available-groups-list" class="available-groups-list"></div>
+                </div>
+                <div class="groups-footer">
+                    <button id="join-group-btn" class="primary-btn">
+                        <i class="fas fa-users"></i>
+                        Join Group
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="group-avatar">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="group-details">
+                        <h3 id="current-group-name"></h3>
+                        <span class="group-participants">No participants yet</span>
+                    </div>
+                </div>
+                <div class="chat-header-actions">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+            <div class="messages-container">
+                <div id="messages"></div>
+            </div>
+            <div class="chat-input">
+                <div class="input-actions">
+                    <i class="far fa-face-smile"></i>
+                    <i class="fas fa-paperclip"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" id="message-input" placeholder="Type a message" autocomplete="off">
+                </div>
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div id="create-group-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Group</h3>
+                <button class="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="group-avatar-picker">
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="group-name-input" placeholder="Group Name" autocomplete="off">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-group-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-group-btn" class="primary-btn">Create Group</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
